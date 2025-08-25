@@ -1,0 +1,69 @@
+# Starter tag extraction rules for renewable tenders (solar, wind, hybrid, BESS).
+# Syntax: each tag has one or more regex patterns. The first match wins.
+# Use named groups (?P<value>...) to capture the result when helpful.
+
+project_name:
+  - '(?i)project\s*:\s*(?P<value>.+)$'
+  - '(?i)(?P<value>[A-Za-z0-9\-/&(),. ]{10,})\s*(?:solar|wind|hybrid|bess)\s*project'
+
+project_location:
+  - '(?i)location\s*:\s*(?P<value>.+)$'
+  - '(?i)at\s+(?P<value>[A-Za-z ]+),?\s*(?:district|state|india)'
+  - '(?i)(?P<value>[A-Za-z ]+)\s*district'
+
+state:
+  - '(?i)(?P<value>andhra pradesh|arunachal pradesh|assam|bihar|chhattisgarh|goa|gujarat|haryana|himachal pradesh|jharkhand|karnataka|kerala|madhya pradesh|maharashtra|manipur|meghalaya|mizoram|nagaland|odisha|punjab|rajasthan|sikkim|tamil nadu|telangana|tripura|uttar pradesh|uttarakhand|west bengal)'
+
+technology:
+  - '(?i)(?P<value>solar\s*pv|wind\s*turbine|hybrid\s*\(wind\+solar\)|wind\s*\+\s*solar|floating\s*solar|rooftop\s*solar|bess|energy\s*storage)'
+
+project_capacity_mw:
+  - '(?i)(?P<value>[0-9]+(?:\.[0-9]+)?)\s*(?:mw|megawatt)'
+  - '(?i)capacity\s*[:\-]\s*(?P<value>[0-9]+(?:\.[0-9]+)?)\s*mw'
+
+storage_capacity_mwh:
+  - '(?i)(?P<value>[0-9]+(?:\.[0-9]+)?)\s*(?:mwh|\bmega\w*\s*wh\b)'
+  - '(?i)(?P<value>[0-9]+(?:\.[0-9]+)?)\s*mwhr'
+
+interconnection_voltage_kv:
+  - '(?i)(?P<value>[0-9]+(?:\.[0-9]+)?)\s*(?:kv)\b'
+  - '(?i)inter[- ]?connection\s*voltage\s*[:\-]\s*(?P<value>[0-9]+(?:\.[0-9]+)?)\s*kv'
+
+tendering_agency:
+  - '(?i)(?:owner|tendering\s*authority|implementing\s*agency)\s*[:\-]\s*(?P<value>.+)$'
+  - '(?i)(seci|ntpc|nhpc|gsecl|geda|reda|gedcol|apspdcl|tsredco|upneda|rrecl|mnre|gtil|mppgcl|wbsecl|mahadiscom|kredl|geda|mspgcl)'
+
+bid_submission_deadline:
+  - '(?i)(?:bid|tender)\s*(?:submission|closing|due)\s*(?:date|deadline)\s*[:\-]?\s*(?P<value>\d{1,2}[-/ ](?:\w+|\d{1,2})[-/ ]\d{2,4})'
+  - '(?i)last\s*date\s*of\s*submission\s*[:\-]?\s*(?P<value>\d{1,2}[-/ ](?:\w+|\d{1,2})[-/ ]\d{2,4})'
+
+emd_amount_rs:
+  - '(?i)(?:earnest\s*money\s*deposit|emd)\s*[:\-]?\s*(?:rs\.?\s*)?(?P<value>[0-9,]+(?:\.[0-9]+)?)'
+  - '(?i)emd\s*[:\-]?\s*in\s*rs\.?\s*(?P<value>[0-9,]+)'
+
+pbg_percent_or_amount:
+  - '(?i)(?:performance\s*bank\s*guarantee|pbg)\s*[:\-]?\s*(?P<value>[0-9.,% ]+)'
+
+completion_time_months:
+  - '(?i)(?P<value>[0-9]+)\s*(?:months|month)\b'
+  - '(?i)(?P<value>[0-9]+)\s*(?:weeks|week)\b'
+
+price_cap_rs_per_kwh:
+  - '(?i)(?P<value>[0-9]+(?:\.[0-9]+)?)\s*/?\s*(?:rs\.?/?kwh|₹/?kwh|per\s*kwh|rupees\s*per\s*kwh)'
+  - '(?i)tariff\s*cap\s*[:\-]\s*(?P<value>[0-9]+(?:\.[0-9]+)?)'
+
+o_and_m_years:
+  - '(?i)(?:o\s*&\s*m|operation\s*&\s*maintenance|o\s*/\s*m)\s*(?:period|years?)\s*[:\-]?\s*(?P<value>[0-9]+)'
+
+eligibility_avg_turnover_cr:
+  - '(?i)(?:average\s*annual\s*turnover|aat)\s*(?:of)?\s*(?P<value>[0-9.,]+)\s*(?:crore|cr)'
+  - '(?i)turnover\s*[:\-]?\s*(?P<value>[0-9.,]+)\s*(?:crore|cr)'
+
+eligibility_net_worth_cr:
+  - '(?i)(?:net\s*worth)\s*[:\-]?\s*(?P<value>[-0-9.,]+)\s*(?:crore|cr)?'
+
+grid_code_and_compliance:
+  - '(?i)(?:ieee|iec|cie|cerc|cea|grid\s*code|isce|is\s*\d{3,5})[A-Za-z0-9\-: ]+'
+
+scada_and_metering:
+  - '(?i)(?:ami|scada|rtu|plc|ab	?t|special\s*energy\s*meters?)\b.*'

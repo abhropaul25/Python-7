@@ -1,0 +1,21 @@
+{
+  "source_workbook": "8.1 Lakhwar_Master_v8_MLready_v2.xlsx",
+  "detected_master_sheet": "Parameters_Master",
+  "columns": [
+    "TenderID",
+    "AttributeName",
+    "Version",
+    "Value",
+    "Unit",
+    "ChangeType",
+    "PrevVersion",
+    "SourceDoc",
+    "Notes",
+    "ChangedFromPrev",
+    "NumericDelta",
+    "Source_PDF",
+    "Amendment_Type",
+    "Link_To_AmendmentTracker"
+  ],
+  "generated_at": "2025-08-24T12:56:52.754721"
+}
